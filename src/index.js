@@ -4,7 +4,6 @@ const path = require('path');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
-const passport = require('passport');
 const config = require('./config/config');
 
 
@@ -24,7 +23,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // middlewares
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(session({
   secret: 'secret',
@@ -32,7 +31,7 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(flash());
- 
+
 // Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
@@ -49,7 +48,7 @@ app.use(require('./routes/issues'));
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Server is listening
+// Server is listening 
 app.listen(app.get('port'), () => {
   console.log('Server on port', app.get('port'));
 });

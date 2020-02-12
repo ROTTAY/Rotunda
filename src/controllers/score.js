@@ -1,33 +1,30 @@
+// Config
+const config = require('../config/config');
+
 // Models
 const Score = require('../models/score');
 
 // Helpers
-const { getNumWorkDays } = require('../helpers/utils');
+const { getNumWorkDays } = require('../helpers/Utils');
 
-var errors = new Set();
+// Controllers
 
-/*
- * Return :  Score { value : Integer ;  overdue : String; }
- */
+var { labelNull, labelMoreThanOne , labelWrong , getLabelValue, errors } = require('./labels')
+
+
 var getScore = async function (issue) {
 
   let countLabels = issue.labels.length;
+  let issueTitle = issue.title
 
-  // ERROR 
-  if (countLabels == 0) {
-    errors.add({ text: 'Error : ' + issue.title + ' has no labels assigned ' });
 
-    return new Score(0, true);
+  // VALIDATE ERRORS 
 
-  }
+  if (labelNull(countLabels) != null) return labelNull(countLabels, issueTitle)
 
-  // ERROR 
-  if (countLabels > 1) {
-    errors.add({ text: 'Error : ' + issue.title + ' has more than one label assigned ' });
-
-    return score = new Score(0, true);
-
-  }
+  if (labelMoreThanOne(countLabels) != null) return labelMoreThanOne(countLabels, issueTitle)
+  
+  // if (labelWrong(issue.labels) != null) return labelWrong(issue.labels,issueTitle)
 
   // OK 
 
@@ -42,26 +39,6 @@ var getScore = async function (issue) {
   // console.log('Issue Title :'+ issue.title + 'Label Value :' + labelValue , '  Days Opened : ' + daysOpened + '  Score  (Label Value * Days Opened):  ' + scoresValue)
 
   return score;
-
-}
-
-
-function getLabelValue(label) {
-
-  switch (label) {
-    case 'Critical Priority':
-      return 1000;
-    case 'Very High Priority':
-      return 500;
-    case 'High Priority':
-      return 50;
-    case 'Mid Priority':
-      return 15;
-    case 'Low Priority':
-      return 7;
-    default:
-      return 0;
-  }
 
 }
 

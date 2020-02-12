@@ -11,9 +11,6 @@ function getNumWorkDays(date) {
   var createdDate = new Date(date);
   var currentDate = new Date();
 
-// add a day
-//date.setDate(date.getDate());
-
   while (createdDate <= currentDate) {
 
     // Skips Sunday and Saturday

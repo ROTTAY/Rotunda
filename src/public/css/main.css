@@ -13,6 +13,7 @@ background: linear-gradient(to bottom, #FFFFFF, rgb(238, 231, 208)); /* W3C, IE 
 }
 
 .list-group{
+ 
    overflow:scroll;
   -webkit-overflow-scrolling: touch;
 }
@@ -24,6 +25,5 @@ background: linear-gradient(to bottom, #FFFFFF, rgb(238, 231, 208)); /* W3C, IE 
   border-right-color: #fff;
 }
 
-.list-group-mine .list-group-item:hover {
-  background-color: red;
-}
+
+

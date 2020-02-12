@@ -10,17 +10,11 @@ const repo = client.repo(config.repo)
 const Issue = require('../models/issue');
 
 // Helpers
-const { getNumWorkDays } = require('../helpers/utils');
-
+const { getNumWorkDays } = require('../helpers/Utils');
 
 var { getScore, errors } = require('./score')
 var issues = new Set();
 
-
-/*
- * Return : [Issue { title : String ;  number : Integer; relativeDateCreated : String;  opener : String ; label : Object ; score : Score , url : String   }]
- * Api Doc : https://developer.github.com/v3/issues/
- */
 var getIssues = async function () {
 
   issues.clear();
@@ -28,7 +22,9 @@ var getIssues = async function () {
   let issuesApi = await repo.issuesAsync({ per_page: 10, state: 'open', sort: 'created', filter: 'assigned' })
 
   for (const issue of issuesApi[0]) {
+
     await generateData(issue)
+
   };
 
   let issues_ = [...issues].sort((a, b) => b.score.value - a.score.value);
@@ -44,8 +40,7 @@ async function generateData(issue_) {
 
   var score = await getScore(issue_);
 
-  const issue = new Issue(issue_.title, issue_.id, daysOpened, issue_.assignee.login,
-    issue_.labels, score, issue_.html_url);
+  const issue = new Issue(issue_.title, issue_.id, daysOpened, issue_.assignee.login, issue_.labels, score, issue_.html_url);
 
   // Add each Issue to the Array
   issues.add(issue)
