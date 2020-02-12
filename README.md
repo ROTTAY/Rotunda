@@ -1,5 +1,10 @@
-# Rotunda
+# Rotunda : Issue Tracker
 
+## Git Repository
+
+```
+https://github.com/ROTTAY/Rotunda
+```
 
 ## Installation
 
