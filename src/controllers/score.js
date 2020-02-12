@@ -13,6 +13,7 @@ var { labelNull, labelMoreThanOne , labelWrong , getLabelValue, errors } = requi
 
 
 var getScore = async function (issue) {
+  
 
   let countLabels = issue.labels.length;
   let issueTitle = issue.title

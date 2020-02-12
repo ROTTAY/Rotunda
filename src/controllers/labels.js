@@ -14,6 +14,7 @@ var errors = new Set();
 /* ------ Corner Cases ------  */
 
 function labelNull(countLabels, issueTitle) {
+ 
   if (countLabels == 0) {
 
     if (issueTitle) errors.add({ text: 'Error : ' + issueTitle + ' has no labels assigned ' });
@@ -23,7 +24,6 @@ function labelNull(countLabels, issueTitle) {
   } else {
 
     return null;
-
   }
 }
 
@@ -38,7 +38,6 @@ function labelMoreThanOne(countLabels, issueTitle) {
   } else {
 
     return null;
-
   }
 }
 
@@ -58,7 +57,6 @@ async function labelWrong(labels, issueTitle) {
     } else {
 
       return null;
-
     }
   };
 }

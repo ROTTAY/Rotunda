@@ -16,7 +16,8 @@ var { getScore, errors } = require('./score')
 var issues = new Set();
 
 var getIssues = async function () {
-
+  
+  errors.clear();
   issues.clear();
 
   let issuesApi = await repo.issuesAsync({ per_page: 10, state: 'open', sort: 'created', filter: 'assigned' })
