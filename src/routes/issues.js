@@ -21,12 +21,14 @@ router.get('/issues', async (req, res) => {
 
 router.get('/issues/:user', async (req, res) => {
 
-  // Fix : need an extra validation to filter errors by user
-  errors.clear();
+  
 
   let issues_ = await getIssues();
   let users = await getUsers();
 
+  // Fix : need an extra validation to filter errors by user
+  errors.clear();
+  
   let issues = issues_.filter(i => i.opener === req.params.user);
   res.render('issues/all-issues', { issues, users, errors });
 
